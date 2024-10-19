@@ -3,13 +3,13 @@ package Vistas;
 import java.util.Scanner;
 
 public class VistaPrincipal {
-    private Scanner scanner;
+    private static Scanner scanner;
 
-    public VistaPrincipal() {
-        this.scanner = new Scanner(System.in);
-    }
+    //public VistaPrincipal() {
+    //    this.scanner = new Scanner(System.in);
+   // }
 
-    public void mostrarMenu() {
+    public static void mostrarMenu() {
         System.out.println("\n------ Menú Principal ------");
         System.out.println("1. Gestionar Socios");
         System.out.println("2. Gestionar Excursiones");
@@ -18,11 +18,11 @@ public class VistaPrincipal {
         System.out.print("Seleccione una opción: ");
     }
 
-    public int solicitarOpcion() {
+    public static int solicitarOpcion() {
         return scanner.nextInt();
     }
 
-    public void mostrarMensaje(String mensaje) {
+    public static void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
     }
 }

@@ -1,16 +1,14 @@
 package Modelo;
 
 public class Inscripcion {
-    private Socio socio; //la inscipcion tiene un socio concreto
-    private Excursion excursion;//tiene una excursion concreta
+    private Socio socio; // la inscripción tiene un socio concreto
+    private Excursion excursion; // tiene una excursión concreta
     private int numInscripcion;
-    private int numSocio;
 
-    public Inscripcion(Socio socio, Excursion excursion, int numInscripcion, int numSocio) {
+    public Inscripcion(Socio socio, Excursion excursion, int numInscripcion) {
         this.socio = socio;
         this.excursion = excursion;
         this.numInscripcion = numInscripcion;
-        this.numSocio = numSocio;
     }
 
     public Socio getSocio() {
@@ -37,12 +35,14 @@ public class Inscripcion {
         this.numInscripcion = numInscripcion;
     }
 
-    public int getNumSocio() {
-        return numSocio;
-    }
-
-    public void setNumSocio(int numSocio) {
-        this.numSocio = numSocio;
+    public double calcularPrecioFinal() {
+        double precioBase = excursion.getPrecioInscripcion();
+        if (socio instanceof Federado) {
+            return ((Federado) socio).aplicarDescuentoExcursion(excursion);
+        } else if (socio instanceof Infantil) {
+            return ((Infantil) socio).aplicarDescuentoCuota(precioBase);
+        }
+        return precioBase; // Sin descuento para otros tipos de socios
     }
 
     @Override
@@ -51,7 +51,6 @@ public class Inscripcion {
                 "socio=" + socio +
                 ", excursion=" + excursion +
                 ", numInscripcion=" + numInscripcion +
-                ", numSocio=" + numSocio +
                 '}';
     }
 }

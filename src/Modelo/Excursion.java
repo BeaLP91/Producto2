@@ -56,6 +56,9 @@ public class Excursion {
     public void setPrecioInscripcion(double precioInscripcion) {
         this.precioInscripcion = precioInscripcion;
     }
+    public double getPrecioConDescuento(double porcentajeDescuento) {
+        return precioInscripcion * (1 - (porcentajeDescuento / 100));
+    }
 
     @Override
     public String toString() {
@@ -67,4 +70,5 @@ public class Excursion {
                 ", precioInscripcion=" + precioInscripcion +
                 '}';
     }
+
 }

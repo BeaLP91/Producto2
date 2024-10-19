@@ -17,7 +17,7 @@ public class VistaInscripcion {
     public void mostrarListaInscripciones(ArrayList<Inscripcion> inscripciones) {
         System.out.println("Lista de inscripciones:");
         for (Inscripcion inscripcion : inscripciones) {
-            System.out.println(inscripcion);
+            System.out.println(inscripcion + " - Precio Final: " + inscripcion.calcularPrecioFinal());
         }
     }
 
@@ -43,6 +43,9 @@ public class VistaInscripcion {
         System.out.println("Introduce el número de inscripción:");
         int numInscripcion = scanner.nextInt();
 
-        return new Inscripcion(socioSeleccionado, excursionSeleccionada, numInscripcion, socioSeleccionado.getNumSocio());
+        Inscripcion inscripcion = new Inscripcion(socioSeleccionado, excursionSeleccionada, numInscripcion);
+        System.out.println("El precio final de la inscripción es: " + inscripcion.calcularPrecioFinal());
+
+        return inscripcion;
     }
 }
