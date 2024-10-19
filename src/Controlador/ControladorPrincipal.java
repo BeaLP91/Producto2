@@ -1,11 +1,10 @@
-
 package Controlador;
 
 import Modelo.*;
 import Vistas.*;
-
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 public class ControladorPrincipal {
     private CentroExcursionista centro;
@@ -28,7 +27,7 @@ public class ControladorPrincipal {
         VistaInscripcion vistaInscripcion = new VistaInscripcion();
 
         // Crear el centro excursionista (modelo) con listas vacías inicialmente
-        CentroExcursionista centro = new CentroExcursionista(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        CentroExcursionista centro = new CentroExcursionista(new ListaSocios(), new ListaExcursiones(), new ListaInscripciones());
 
         // Crear el controlador principal
         ControladorPrincipal controlador = new ControladorPrincipal(centro, vistaSocio, vistaExcursion, vistaInscripcion);
@@ -56,7 +55,7 @@ public class ControladorPrincipal {
             System.out.println("2. Gestionar Excursiones");
             System.out.println("3. Gestionar Inscripciones");
             System.out.println("4. Salir");
-            System.out.println("Seleccione una opción: ");
+            System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
 
             switch (opcion) {
@@ -89,7 +88,7 @@ public class ControladorPrincipal {
             System.out.println("2. Mostrar Todos los Socios");
             System.out.println("3. Eliminar Socio");
             System.out.println("4. Volver al Menú Principal");
-            System.out.println("Seleccione una opción: ");
+            System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
 
             switch (opcion) {
@@ -121,7 +120,7 @@ public class ControladorPrincipal {
             System.out.println("1. Registrar Excursión");
             System.out.println("2. Mostrar Todas las Excursiones");
             System.out.println("3. Volver al Menú Principal");
-            System.out.println("Seleccione una opción: ");
+            System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
 
             switch (opcion) {
@@ -150,7 +149,7 @@ public class ControladorPrincipal {
             System.out.println("1. Registrar Inscripción");
             System.out.println("2. Mostrar Todas las Inscripciones");
             System.out.println("3. Volver al Menú Principal");
-            System.out.println("Seleccione una opción: ");
+            System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
 
             switch (opcion) {
@@ -169,50 +168,53 @@ public class ControladorPrincipal {
         } while (opcion != 3);
     }
 
-    // Métodos para las operaciones con el modelo
-
     // Métodos para gestionar Socios
     public void registrarSocio() {
         Socio nuevoSocio = vistaSocio.solicitarDatosSocio();
-        centro.getSocios().add(nuevoSocio);
+        centro.getSocios().agregar(nuevoSocio); // Cambiado
         vistaSocio.mostrarMensaje("Socio registrado con éxito: " + nuevoSocio);
     }
 
     public void mostrarTodosLosSocios() {
-        ArrayList<Socio> socios = centro.getSocios();
+        List<Socio> socios = centro.getSocios().obtenerTodos();  // Usa el método de obtener todos
         vistaSocio.mostrarListaSocios(socios);
     }
 
     public void eliminarSocio() {
         int numSocio = vistaSocio.solicitarNumeroSocio();
-        centro.getSocios().removeIf(s -> s.getNumSocio() == numSocio);
+        centro.getSocios().eliminar(centro.getSocios().buscarPorNumero(numSocio)); // Cambiado
         vistaSocio.mostrarMensaje("Socio eliminado con éxito.");
     }
 
     // Métodos para gestionar Excursiones
     public void registrarExcursion() {
         Excursion nuevaExcursion = vistaExcursion.solicitarDatosExcursion();
-        centro.getExcursiones().add(nuevaExcursion);
+        centro.getExcursiones().agregar(nuevaExcursion); // Cambiado
         vistaExcursion.mostrarMensaje("Excursión registrada con éxito: " + nuevaExcursion);
     }
 
     public void mostrarTodasLasExcursiones() {
-        ArrayList<Excursion> excursiones = centro.getExcursiones();
+        List<Excursion> excursiones = centro.getExcursiones().obtenerTodos();  // Usa el método de obtener todos
         vistaExcursion.mostrarListaExcursiones(excursiones);
     }
 
     // Métodos para gestionar Inscripciones
     public void registrarInscripcion() {
-        Inscripcion nuevaInscripcion = vistaInscripcion.solicitarDatosInscripcion(centro.getSocios(), centro.getExcursiones());
-        centro.getInscripciones().add(nuevaInscripcion);
+        Inscripcion nuevaInscripcion = vistaInscripcion.solicitarDatosInscripcion(
+                centro.getSocios().obtenerTodos(),
+                centro.getExcursiones().obtenerTodos()
+        );
+        centro.getInscripciones().agregar(nuevaInscripcion);
         vistaInscripcion.mostrarMensaje("Inscripción registrada con éxito: " + nuevaInscripcion);
     }
 
     public void mostrarTodasLasInscripciones() {
-        ArrayList<Inscripcion> inscripciones = centro.getInscripciones();
+        List<Inscripcion> inscripciones = centro.getInscripciones().obtenerTodos();
         vistaInscripcion.mostrarListaInscripciones(inscripciones);
     }
 }
+
+
 
 
 /*package Controlador;

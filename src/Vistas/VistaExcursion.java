@@ -1,8 +1,7 @@
 package Vistas;
 
 import Modelo.Excursion;
-
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class VistaExcursion {
@@ -12,7 +11,7 @@ public class VistaExcursion {
         System.out.println(mensaje);
     }
 
-    public void mostrarListaExcursiones(ArrayList<Excursion> excursiones) {
+    public void mostrarListaExcursiones(List<Excursion> excursiones) {  // Cambiado a List
         System.out.println("Lista de excursiones:");
         for (Excursion excursion : excursiones) {
             System.out.println(excursion);

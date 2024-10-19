@@ -4,7 +4,8 @@ import Modelo.Inscripcion;
 import Modelo.Socio;
 import Modelo.Excursion;
 
-import java.util.ArrayList;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class VistaInscripcion {
@@ -14,14 +15,14 @@ public class VistaInscripcion {
         System.out.println(mensaje);
     }
 
-    public void mostrarListaInscripciones(ArrayList<Inscripcion> inscripciones) {
+    public void mostrarListaInscripciones(List<Inscripcion> inscripciones) {
         System.out.println("Lista de inscripciones:");
         for (Inscripcion inscripcion : inscripciones) {
             System.out.println(inscripcion + " - Precio Final: " + inscripcion.calcularPrecioFinal());
         }
     }
 
-    public Inscripcion solicitarDatosInscripcion(ArrayList<Socio> socios, ArrayList<Excursion> excursiones) {
+    public Inscripcion solicitarDatosInscripcion(List<Socio> socios, List<Excursion> excursiones) {
         System.out.println("Lista de socios disponibles:");
         for (Socio socio : socios) {
             System.out.println(socio.getNumSocio() + " - " + socio.getNombre());

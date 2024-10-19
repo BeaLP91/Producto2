@@ -5,7 +5,7 @@ import Modelo.Estandar;
 import Modelo.Seguro;
 import Modelo.TipoSeguro;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class VistaSocio {
@@ -15,7 +15,7 @@ public class VistaSocio {
         System.out.println(mensaje);
     }
 
-    public void mostrarListaSocios(ArrayList<Socio> socios) {
+    public void mostrarListaSocios(List<Socio> socios) {
         System.out.println("Lista de socios:");
         for (Socio socio : socios) {
             System.out.println(socio);
